@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.cfttesttask.ui.components.home.HomeScreen
 
 @Composable
 fun CardNavHost(
@@ -17,7 +18,7 @@ fun CardNavHost(
     composable(
         route = Screen.Home.route
     ) {
-
+        HomeScreen()
     }
     composable(
         route = Screen.History.route

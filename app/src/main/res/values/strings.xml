@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">CFTTestTask</string>
+    <string name="home_app_bar_title">Home screen</string>
+    <string name="item_title_scheme_network">SCHEME / NETWORK</string>
+    <string name="item_title_brand">BRAND</string>
+    <string name="item_title_card_number">CARD NUMBER</string>
+    <string name="item_subtitle_card_number_length">LENGTH</string>
+    <string name="item_subtitle_card_number_luhn">LUHN</string>
+    <string name="item_title_type">TYPE</string>
+    <string name="item_subtitle_type_debit">Debit</string>
+    <string name="item_subtitle_type_credit">Credit</string>
+    <string name="item_title_prepaid">PREPAID</string>
+    <string name="item_title_country">COUNTRY</string>
+    <string name="item_subtitle_country_latitude">latitude</string>
+    <string name="item_subtitle_country_longitude">longitude</string>
+    <string name="item_title_bank">BANK</string>
+    <string name="not_applicable">N/A</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
