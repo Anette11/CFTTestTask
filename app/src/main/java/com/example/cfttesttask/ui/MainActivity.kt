@@ -1,4 +1,4 @@
-package com.example.cfttesttask
+package com.example.cfttesttask.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

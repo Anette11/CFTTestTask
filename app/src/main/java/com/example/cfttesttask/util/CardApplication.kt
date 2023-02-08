@@ -1,4 +1,4 @@
-package com.example.cfttesttask
+package com.example.cfttesttask.util
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
