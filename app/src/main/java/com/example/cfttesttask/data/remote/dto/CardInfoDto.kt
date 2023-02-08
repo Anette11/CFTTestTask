@@ -1,4 +1,4 @@
-package com.example.cfttesttask.data.remote
+package com.example.cfttesttask.data.remote.dto
 
 data class CardInfoDto(
     val bank: BankDto?,

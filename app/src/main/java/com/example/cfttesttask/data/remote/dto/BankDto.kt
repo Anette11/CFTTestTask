@@ -1,4 +1,4 @@
-package com.example.cfttesttask.data.remote
+package com.example.cfttesttask.data.remote.dto
 
 data class BankDto(
     val city: String?,

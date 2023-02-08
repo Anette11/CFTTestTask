@@ -4,10 +4,10 @@ import com.example.cfttesttask.data.local.BankDbo
 import com.example.cfttesttask.data.local.CardInfoDbo
 import com.example.cfttesttask.data.local.CountryDbo
 import com.example.cfttesttask.data.local.NumberDbo
-import com.example.cfttesttask.data.remote.BankDto
-import com.example.cfttesttask.data.remote.CardInfoDto
-import com.example.cfttesttask.data.remote.CountryDto
-import com.example.cfttesttask.data.remote.NumberDto
+import com.example.cfttesttask.data.remote.dto.BankDto
+import com.example.cfttesttask.data.remote.dto.CardInfoDto
+import com.example.cfttesttask.data.remote.dto.CountryDto
+import com.example.cfttesttask.data.remote.dto.NumberDto
 
 fun BankDto.toBankDbo() = BankDbo(
     city = this.city,

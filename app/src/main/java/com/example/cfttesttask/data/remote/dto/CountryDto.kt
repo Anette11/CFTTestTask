@@ -1,4 +1,4 @@
-package com.example.cfttesttask.data.remote
+package com.example.cfttesttask.data.remote.dto
 
 data class CountryDto(
     val alpha2: String?,
