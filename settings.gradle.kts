@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "CFTTestTask"
-include ':app'
+include(":app")
