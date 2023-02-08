@@ -1,9 +1,9 @@
 package com.example.cfttesttask.data.mappers
 
-import com.example.cfttesttask.data.local.BankDbo
-import com.example.cfttesttask.data.local.CardInfoDbo
-import com.example.cfttesttask.data.local.CountryDbo
-import com.example.cfttesttask.data.local.NumberDbo
+import com.example.cfttesttask.data.local.dbo.BankDbo
+import com.example.cfttesttask.data.local.dbo.CardInfoDbo
+import com.example.cfttesttask.data.local.dbo.CountryDbo
+import com.example.cfttesttask.data.local.dbo.NumberDbo
 import com.example.cfttesttask.data.remote.dto.BankDto
 import com.example.cfttesttask.data.remote.dto.CardInfoDto
 import com.example.cfttesttask.data.remote.dto.CountryDto
