@@ -81,22 +81,35 @@ class HomeViewModel @Inject constructor(
         add(Item.Space)
         add(
             Item.CardNumber(
-                length = cardInfoDbo.number?.length ?: 0,
-                luhn = if (cardInfoDbo.number?.luhn == true) Luhn.Yes else Luhn.No
+                length = (cardInfoDbo.number?.length
+                    ?: resourcesProvider.getString(R.string.not_applicable)).toString(),
+                luhn = when (cardInfoDbo.number?.luhn) {
+                    true -> Luhn.Yes
+                    false -> Luhn.No
+                    else -> Luhn.Unknown
+                }
             )
         )
         add(Item.Space)
         add(
             Item.Type(
-                type = if (cardInfoDbo.type == resourcesProvider.getString(R.string.item_subtitle_type_debit)
-                        .lowercase()
-                ) Type.Debit else Type.Credit
+                type = when (cardInfoDbo.type) {
+                    resourcesProvider.getString(R.string.item_subtitle_type_debit)
+                        .lowercase() -> Type.Debit
+                    resourcesProvider.getString(R.string.item_subtitle_type_credit)
+                        .lowercase() -> Type.Credit
+                    else -> Type.Unknown
+                }
             )
         )
         add(Item.Space)
         add(
             Item.Prepaid(
-                prepaid = if (cardInfoDbo.prepaid == true) Prepaid.Yes else Prepaid.No
+                prepaid = when (cardInfoDbo.prepaid) {
+                    true -> Prepaid.Yes
+                    false -> Prepaid.No
+                    else -> Prepaid.Unknown
+                }
             )
         )
         add(Item.Space)
@@ -106,8 +119,10 @@ class HomeViewModel @Inject constructor(
                     ?: resourcesProvider.getString(R.string.not_applicable),
                 name = cardInfoDbo.country?.name
                     ?: resourcesProvider.getString(R.string.not_applicable),
-                latitude = cardInfoDbo.country?.latitude ?: 0.0,
-                longitude = cardInfoDbo.country?.longitude ?: 0.0
+                latitude = (cardInfoDbo.country?.latitude
+                    ?: resourcesProvider.getString(R.string.not_applicable)).toString(),
+                longitude = (cardInfoDbo.country?.longitude
+                    ?: resourcesProvider.getString(R.string.not_applicable)).toString()
             )
         )
         add(Item.Space)

@@ -50,5 +50,11 @@ fun PrepaidItem(
             },
             style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
         )
+        is Prepaid.Unknown -> Text(
+            text = "${stringResource(id = R.string.yes)} /" +
+                    " ${stringResource(id = R.string.no)}",
+            color = Color.LightGray,
+            fontSize = dimensionResource(id = R.dimen._18sp).value.sp
+        )
     }
 }

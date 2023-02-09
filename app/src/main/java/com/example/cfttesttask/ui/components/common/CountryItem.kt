@@ -39,11 +39,11 @@ fun CountryItem(
             withStyle(style = SpanStyle(color = Color.LightGray)) {
                 append("(${stringResource(id = R.string.item_subtitle_country_latitude)}: ")
             }
-            append("${item.latitude}")
+            append(item.latitude)
             withStyle(style = SpanStyle(color = Color.LightGray)) {
                 append(", ${stringResource(id = R.string.item_subtitle_country_longitude)}: ")
             }
-            append("${item.longitude}")
+            append(item.longitude)
             withStyle(style = SpanStyle(color = Color.LightGray)) {
                 append(")")
             }

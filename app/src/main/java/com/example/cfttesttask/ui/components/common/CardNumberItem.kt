@@ -43,7 +43,7 @@ fun CardNumberItem(
                 style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
             )
             Text(
-                text = "${item.length}",
+                text = item.length,
                 style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
             )
         }
@@ -74,6 +74,12 @@ fun CardNumberItem(
                         append(stringResource(id = R.string.no))
                     },
                     style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
+                )
+                is Luhn.Unknown -> Text(
+                    text = "${stringResource(id = R.string.yes)} /" +
+                            " ${stringResource(id = R.string.no)}",
+                    color = Color.LightGray,
+                    fontSize = dimensionResource(id = R.dimen._18sp).value.sp
                 )
             }
         }

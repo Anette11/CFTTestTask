@@ -10,7 +10,7 @@ sealed class Item {
     ) : Item()
 
     data class CardNumber(
-        val length: Int,
+        val length: String,
         val luhn: Luhn
     ) : Item()
 
@@ -25,8 +25,8 @@ sealed class Item {
     data class Country(
         val emoji: String,
         val name: String,
-        val latitude: Double,
-        val longitude: Double
+        val latitude: String,
+        val longitude: String
     ) : Item()
 
     data class Bank(
@@ -42,14 +42,17 @@ sealed class Item {
 sealed class Luhn {
     object Yes : Luhn()
     object No : Luhn()
+    object Unknown : Luhn()
 }
 
 sealed class Prepaid {
     object Yes : Prepaid()
     object No : Prepaid()
+    object Unknown : Prepaid()
 }
 
 sealed class Type {
     object Debit : Type()
     object Credit : Type()
+    object Unknown : Type()
 }

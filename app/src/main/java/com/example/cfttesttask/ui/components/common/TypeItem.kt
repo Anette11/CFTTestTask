@@ -50,5 +50,11 @@ fun TypeItem(
             },
             style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
         )
+        is Type.Unknown -> Text(
+            text = "${stringResource(id = R.string.item_subtitle_type_debit)} /" +
+                    " ${stringResource(id = R.string.item_subtitle_type_credit)}",
+            color = Color.LightGray,
+            fontSize = dimensionResource(id = R.dimen._18sp).value.sp
+        )
     }
 }
