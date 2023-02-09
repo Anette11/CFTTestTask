@@ -5,6 +5,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import com.example.cfttesttask.R
 
@@ -14,5 +15,7 @@ fun HomeAppBar() =
         modifier = Modifier.fillMaxWidth(),
         title = {
             Text(text = stringResource(id = R.string.home_app_bar_title))
-        }
+        },
+        backgroundColor = colorResource(id = R.color.light_green),
+        contentColor = colorResource(id = R.color.white)
     )

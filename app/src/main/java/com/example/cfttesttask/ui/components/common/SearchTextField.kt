@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -19,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -65,7 +63,13 @@ fun SearchTextField(
                     }
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
-                visualTransformation = { annotatedString -> annotatedString.cardFilter() }
+                visualTransformation = { annotatedString -> annotatedString.cardFilter() },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    backgroundColor = colorResource(id = R.color.white),
+                    focusedBorderColor = colorResource(id = R.color.green),
+                    focusedLabelColor = colorResource(id = R.color.green),
+                    cursorColor = colorResource(id = R.color.green)
+                )
             )
         }
         IconButton(

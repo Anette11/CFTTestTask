@@ -11,9 +11,7 @@ import com.example.cfttesttask.R
 @Composable
 fun SpaceItem() {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = dimensionResource(id = R.dimen._16dp))
+        modifier = Modifier.fillMaxWidth()
     ) {
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen._8dp)))
         Divider(

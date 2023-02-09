@@ -11,7 +11,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.cfttesttask.R
 import com.example.cfttesttask.ui.components.common.CardInfo
 import com.example.cfttesttask.ui.components.common.SearchTextField
 
@@ -34,7 +36,8 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             HomeAppBar()
-        }
+        },
+        backgroundColor = colorResource(id = R.color.gray)
     ) { paddingValues: PaddingValues ->
         Box(
             modifier = Modifier.padding(paddingValues = paddingValues),
@@ -53,7 +56,7 @@ fun HomeScreen(
                 )
                 if (cardInfo.isNotEmpty()) CardInfo(cardInfo = cardInfo)
             }
-            if (isLoading) CircularProgressIndicator()
+            if (isLoading) CircularProgressIndicator(color = colorResource(id = R.color.green))
         }
     }
 }
