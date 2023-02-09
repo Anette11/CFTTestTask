@@ -22,15 +22,24 @@ class CardRepositoryImpl @Inject constructor(
 
     override suspend fun getCardInfo(
         bin: String
-    ): Flow<NetworkResource<CardInfoDbo>> = flow {
+    ): Flow<NetworkResource<CardInfoDbo>> = flow<NetworkResource<CardInfoDbo>> {
         emit(NetworkResource.Loading())
         try {
+            val oldCardInfoDbo = dao.getCardInfo(bin = bin)
+            oldCardInfoDbo?.let {
+                emit(NetworkResource.Success(data = oldCardInfoDbo))
+                emit(NetworkResource.Loading())
+            }
             val response = api.getCardInfo(bin = bin)
             if (response.isSuccessful && response.body() != null) {
                 val cardInfoDto = response.body()!!
                 dao.saveCardInfo(cardInfoDbo = cardInfoDto.toCardInfoDbo(bin = bin))
-                val cardInfoDbo = dao.getCardInfo(bin = bin)
-                emit(NetworkResource.Success(data = cardInfoDbo))
+                val newCardInfoDbo = dao.getCardInfo(bin = bin)
+                if (newCardInfoDbo != null) {
+                    emit(NetworkResource.Success(data = newCardInfoDbo))
+                } else {
+                    emit(NetworkResource.Failure(message = resourcesProvider.getString(R.string.generic_error)))
+                }
             } else {
                 emit(NetworkResource.Failure(message = resourcesProvider.getString(R.string.generic_error)))
             }

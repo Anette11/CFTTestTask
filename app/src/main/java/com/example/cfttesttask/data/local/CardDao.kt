@@ -10,7 +10,7 @@ import com.example.cfttesttask.data.local.dbo.CardInfoDbo
 interface CardDao {
 
     @Query("SELECT * FROM card_info WHERE bin = :bin")
-    fun getCardInfo(bin: String): CardInfoDbo
+    fun getCardInfo(bin: String): CardInfoDbo?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCardInfo(cardInfoDbo: CardInfoDbo)
