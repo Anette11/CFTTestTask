@@ -30,12 +30,22 @@ class HomeViewModel @Inject constructor(
     val value: StateFlow<String> = _value
 
     fun onValueChange(newValue: String) {
-        _value.value = newValue
+        val trimmedNewValue = newValue.replace(" ", "").trim()
+        var value = ""
+        for (i in trimmedNewValue.indices) {
+            value = value.plus(trimmedNewValue[i])
+            if ((i + 1) % 4 == 0) {
+                value = value.plus(" ")
+            }
+        }
+        _value.value = value
     }
 
     fun onClear() {
         _value.value = ""
     }
+
+    fun isEnable(): Boolean = _value.value.isNotEmpty()
 
     private val _error: MutableSharedFlow<String> = MutableSharedFlow()
     val error: SharedFlow<String> = _error
@@ -52,6 +62,9 @@ class HomeViewModel @Inject constructor(
                     }
                     is NetworkResource.Failure -> {
                         _isLoading.emit(false)
+                        _error.emit(
+                            resource.message ?: resourcesProvider.getString(R.string.generic_error)
+                        )
                     }
                 }
             }

@@ -49,7 +49,9 @@ fun HomeScreen(
                         viewModel.onValueChange(newValue = newValue)
                     },
                     onClear = viewModel::onClear,
-                    onSearch = viewModel::getCardInfo
+                    onSearch = viewModel::getCardInfo,
+                    isClearEnable = viewModel.isEnable(),
+                    isSearchEnable = viewModel.isEnable()
                 )
                 LazyColumn {
                     items(cardInfo) { item: Item ->
