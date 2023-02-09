@@ -51,7 +51,7 @@ class HomeViewModel @Inject constructor(
     val error: SharedFlow<String> = _error
 
     fun getCardInfo() = viewModelScope.launch {
-        repository.getCardInfo(bin = value.value)
+        repository.getCardInfo(bin = value.value.replace(" ", "").trim())
             .collect { resource: NetworkResource<CardInfoDbo> ->
                 when (resource) {
                     is NetworkResource.Loading -> _isLoading.emit(true)
