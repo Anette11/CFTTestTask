@@ -1,7 +1,6 @@
 package com.example.cfttesttask.util
 
 sealed class Item {
-
     data class SchemeNetwork(
         val schemeNetwork: String
     ) : Item()
@@ -38,4 +37,19 @@ sealed class Item {
     ) : Item()
 
     object Space : Item()
+}
+
+sealed class Luhn {
+    object Yes : Luhn()
+    object No : Luhn()
+}
+
+sealed class Prepaid {
+    object Yes : Prepaid()
+    object No : Prepaid()
+}
+
+sealed class Type {
+    object Debit : Type()
+    object Credit : Type()
 }
