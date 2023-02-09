@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "card_info")
 data class CardInfoDbo(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    @PrimaryKey(autoGenerate = false)
+    val bin: String,
 
     @Embedded
     val bank: BankDbo?,

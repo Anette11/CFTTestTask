@@ -23,10 +23,4 @@ sealed class NetworkResource<T>(
         data = null,
         message = null
     )
-
-    class Empty<T>
-        : NetworkResource<T>(
-        data = null,
-        message = null
-    )
 }

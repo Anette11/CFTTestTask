@@ -12,7 +12,5 @@ interface CardApi {
     }
 
     @GET("{bin}")
-    suspend fun getCardInfo(
-        @Path("bin") bin: Int
-    ): Response<CardInfoDto>
+    suspend fun getCardInfo(@Path("bin") bin: String): Response<CardInfoDto>
 }

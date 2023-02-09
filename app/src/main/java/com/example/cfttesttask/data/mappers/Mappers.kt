@@ -16,14 +16,17 @@ fun BankDto.toBankDbo() = BankDbo(
     url = this.url
 )
 
-fun CardInfoDto.toCardInfoDbo() = CardInfoDbo(
+fun CardInfoDto.toCardInfoDbo(
+    bin: String
+) = CardInfoDbo(
     bank = this.bank?.toBankDbo(),
     brand = this.brand,
     country = this.country?.toCountryDbo(),
     number = this.number?.toNumberDbo(),
     prepaid = this.prepaid,
     scheme = this.scheme,
-    type = this.type
+    type = this.type,
+    bin = bin
 )
 
 fun CountryDto.toCountryDbo() = CountryDbo(

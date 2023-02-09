@@ -1,0 +1,12 @@
+package com.example.cfttesttask.util
+
+import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+
+class ResourcesProviderImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+) : ResourcesProvider {
+
+    override fun getString(stringRes: Int): String = context.getString(stringRes)
+}

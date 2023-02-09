@@ -18,7 +18,9 @@ import com.example.cfttesttask.R
 @Composable
 fun SearchTextField(
     value: String,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    onClear: () -> Unit,
+    onSearch: () -> Unit
 ) = Row(
     modifier = Modifier.fillMaxWidth(),
     verticalAlignment = Alignment.CenterVertically
@@ -30,7 +32,7 @@ fun SearchTextField(
         singleLine = true,
         label = { Text(text = stringResource(id = R.string.search_text_field_bin)) },
         trailingIcon = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = onClear) {
                 Icon(
                     imageVector = Icons.Default.Close,
                     contentDescription = null
@@ -38,7 +40,7 @@ fun SearchTextField(
             }
         }
     )
-    IconButton(onClick = { }) {
+    IconButton(onClick = onSearch) {
         Icon(
             imageVector = Icons.Default.Search,
             contentDescription = null
