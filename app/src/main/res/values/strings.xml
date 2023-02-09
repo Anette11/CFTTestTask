@@ -23,4 +23,6 @@
     <string name="search_text_field_label">BIN</string>
     <string name="search_text_field_placeholder">Enter BIN…</string>
     <string name="yes">Yes</string>
+    <string name="space">\u0020</string>
+    <string name="empty" />
 </resources>

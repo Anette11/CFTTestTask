@@ -26,23 +26,27 @@ class HomeViewModel @Inject constructor(
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
-    private val _value: MutableStateFlow<String> = MutableStateFlow("")
+    private val _value: MutableStateFlow<String> =
+        MutableStateFlow(resourcesProvider.getString(R.string.empty))
     val value: StateFlow<String> = _value
 
     fun onValueChange(newValue: String) {
-        val trimmedNewValue = newValue.replace(" ", "").trim()
-        var value = ""
+        val trimmedNewValue = newValue.replace(
+            resourcesProvider.getString(R.string.space),
+            resourcesProvider.getString(R.string.empty)
+        ).trim()
+        var value = resourcesProvider.getString(R.string.empty)
         for (i in trimmedNewValue.indices) {
             value = value.plus(trimmedNewValue[i])
             if ((i + 1) % 4 == 0) {
-                value = value.plus(" ")
+                value = value.plus(resourcesProvider.getString(R.string.space))
             }
         }
         _value.value = value
     }
 
     fun onClear() {
-        _value.value = ""
+        _value.value = resourcesProvider.getString(R.string.empty)
     }
 
     fun isEnable(): Boolean = _value.value.isNotEmpty()
@@ -51,7 +55,12 @@ class HomeViewModel @Inject constructor(
     val error: SharedFlow<String> = _error
 
     fun getCardInfo() = viewModelScope.launch {
-        repository.getCardInfo(bin = value.value.replace(" ", "").trim())
+        repository.getCardInfo(
+            bin = value.value.replace(
+                resourcesProvider.getString(R.string.space),
+                resourcesProvider.getString(R.string.empty)
+            ).trim()
+        )
             .collect { resource: NetworkResource<CardInfoDbo> ->
                 when (resource) {
                     is NetworkResource.Loading -> _isLoading.emit(true)
@@ -95,7 +104,9 @@ class HomeViewModel @Inject constructor(
         add(Item.Space)
         add(
             Item.Type(
-                type = if (cardInfoDbo.type == "debit") Type.Debit else Type.Credit
+                type = if (cardInfoDbo.type == resourcesProvider.getString(R.string.item_subtitle_type_debit)
+                        .lowercase()
+                ) Type.Debit else Type.Credit
             )
         )
         add(Item.Space)
