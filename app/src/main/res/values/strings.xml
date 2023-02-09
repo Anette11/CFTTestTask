@@ -17,4 +17,5 @@
     <string name="not_applicable">N/A</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="search_text_field_bin">BIN</string>
 </resources>
