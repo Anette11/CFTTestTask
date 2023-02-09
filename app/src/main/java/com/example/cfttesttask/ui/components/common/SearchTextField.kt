@@ -23,6 +23,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import com.example.cfttesttask.R
+import com.example.cfttesttask.util.cardFilter
 
 @Composable
 fun SearchTextField(
@@ -47,7 +48,7 @@ fun SearchTextField(
         CompositionLocalProvider(LocalTextSelectionColors provides textSelectionColors) {
             OutlinedTextField(
                 value = value,
-                onValueChange = { newValue: String -> onValueChange(newValue) },
+                onValueChange = { newValue: String -> onValueChange(newValue.take(16)) },
                 modifier = Modifier.weight(1f),
                 singleLine = true,
                 label = { Text(text = stringResource(id = R.string.search_text_field_label)) },
@@ -63,7 +64,8 @@ fun SearchTextField(
                         )
                     }
                 },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                visualTransformation = { annotatedString -> annotatedString.cardFilter() }
             )
         }
         IconButton(

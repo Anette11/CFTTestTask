@@ -31,18 +31,7 @@ class HomeViewModel @Inject constructor(
     val value: StateFlow<String> = _value
 
     fun onValueChange(newValue: String) {
-        val trimmedNewValue = newValue.replace(
-            resourcesProvider.getString(R.string.space),
-            resourcesProvider.getString(R.string.empty)
-        ).trim()
-        var value = resourcesProvider.getString(R.string.empty)
-        for (i in trimmedNewValue.indices) {
-            value = value.plus(trimmedNewValue[i])
-            if ((i + 1) % 4 == 0) {
-                value = value.plus(resourcesProvider.getString(R.string.space))
-            }
-        }
-        _value.value = value
+        _value.value = newValue
     }
 
     fun onClear() {
@@ -55,12 +44,7 @@ class HomeViewModel @Inject constructor(
     val error: SharedFlow<String> = _error
 
     fun getCardInfo() = viewModelScope.launch {
-        repository.getCardInfo(
-            bin = value.value.replace(
-                resourcesProvider.getString(R.string.space),
-                resourcesProvider.getString(R.string.empty)
-            ).trim()
-        )
+        repository.getCardInfo(bin = value.value)
             .collect { resource: NetworkResource<CardInfoDbo> ->
                 when (resource) {
                     is NetworkResource.Loading -> _isLoading.emit(true)
