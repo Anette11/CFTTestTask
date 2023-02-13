@@ -3,6 +3,7 @@ package com.example.cfttesttask.data.local.dbo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity(tableName = "card_info")
 data class CardInfoDbo(
@@ -22,5 +23,6 @@ data class CardInfoDbo(
 
     val prepaid: Boolean?,
     val scheme: String?,
-    val type: String?
+    val type: String?,
+    val date: Date?
 )

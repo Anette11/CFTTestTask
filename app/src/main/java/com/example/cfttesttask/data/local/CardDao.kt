@@ -14,4 +14,10 @@ interface CardDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCardInfo(cardInfoDbo: CardInfoDbo)
+
+    @Query("SELECT * FROM card_info")
+    fun getAllCardInfos(): List<CardInfoDbo>
+
+    @Query("DELETE FROM card_info")
+    suspend fun clearAllCardInfos()
 }

@@ -23,7 +23,8 @@ object DatabaseModule {
         context = context,
         klass = CardDatabase::class.java,
         name = CardDatabase.name
-    ).build()
+    ).fallbackToDestructiveMigration()
+        .build()
 
     @Provides
     @Singleton

@@ -2,6 +2,8 @@ package com.example.cfttesttask.ui.components.home
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -45,7 +47,11 @@ fun HomeScreen(
             modifier = Modifier.padding(paddingValues = paddingValues),
             contentAlignment = Alignment.Center
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+            ) {
                 SearchTextField(
                     value = value,
                     onValueChange = { newValue: String ->

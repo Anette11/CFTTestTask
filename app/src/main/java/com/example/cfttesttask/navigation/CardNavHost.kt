@@ -34,6 +34,13 @@ fun CardNavHost(
     composable(
         route = Screen.History.route
     ) {
-        HistoryScreen(onBackClick = { navController.navigateUp() })
+        HistoryScreen(
+            onBackClick = { navController.navigateUp() },
+            onPhoneClick = { phone: String -> onPhoneClick(phone) },
+            onUrlClick = { url: String -> onUrlClick(url) },
+            onCoordinatesClick = { latitude: Double, longitude: Double ->
+                onCoordinatesClick(latitude, longitude)
+            }
+        )
     }
 }

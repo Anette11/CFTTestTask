@@ -8,6 +8,7 @@ import com.example.cfttesttask.data.remote.dto.BankDto
 import com.example.cfttesttask.data.remote.dto.CardInfoDto
 import com.example.cfttesttask.data.remote.dto.CountryDto
 import com.example.cfttesttask.data.remote.dto.NumberDto
+import java.util.*
 
 fun BankDto.toBankDbo() = BankDbo(
     city = this.city,
@@ -26,7 +27,8 @@ fun CardInfoDto.toCardInfoDbo(
     prepaid = this.prepaid,
     scheme = this.scheme,
     type = this.type,
-    bin = bin
+    bin = bin,
+    date = Date()
 )
 
 fun CountryDto.toCountryDbo() = CountryDbo(

@@ -5,7 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.cfttesttask.R
 import com.example.cfttesttask.data.local.dbo.CardInfoDbo
 import com.example.cfttesttask.repository.CardRepository
-import com.example.cfttesttask.util.*
+import com.example.cfttesttask.util.CoroutineDispatchersProvider
+import com.example.cfttesttask.util.Item
+import com.example.cfttesttask.util.NetworkResource
+import com.example.cfttesttask.util.ResourcesProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -62,7 +65,7 @@ class HomeViewModel @Inject constructor(
                     }
                     is NetworkResource.Success -> {
                         _isLoading.emit(false)
-                        val list = createCardInfo(cardInfoDbo = resource.data!!)
+                        val list = repository.createCardInfo(cardInfoDbo = resource.data!!)
                         _cardInfo.emit(list)
                     }
                     is NetworkResource.Failure -> {
@@ -73,82 +76,5 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
-    }
-
-    private fun createCardInfo(
-        cardInfoDbo: CardInfoDbo
-    ): List<Item> = buildList {
-        add(
-            Item.SchemeNetwork(
-                schemeNetwork = cardInfoDbo.scheme
-                    ?: resourcesProvider.getString(R.string.not_applicable)
-            )
-        )
-        add(Item.Space)
-        add(
-            Item.Brand(
-                brand = cardInfoDbo.brand ?: resourcesProvider.getString(R.string.not_applicable)
-            )
-        )
-        add(Item.Space)
-        add(
-            Item.CardNumber(
-                length = (cardInfoDbo.number?.length
-                    ?: resourcesProvider.getString(R.string.not_applicable)).toString(),
-                luhn = when (cardInfoDbo.number?.luhn) {
-                    true -> Luhn.Yes
-                    false -> Luhn.No
-                    else -> Luhn.Unknown
-                }
-            )
-        )
-        add(Item.Space)
-        add(
-            Item.Type(
-                type = when (cardInfoDbo.type) {
-                    resourcesProvider.getString(R.string.item_subtitle_type_debit)
-                        .lowercase() -> Type.Debit
-                    resourcesProvider.getString(R.string.item_subtitle_type_credit)
-                        .lowercase() -> Type.Credit
-                    else -> Type.Unknown
-                }
-            )
-        )
-        add(Item.Space)
-        add(
-            Item.Prepaid(
-                prepaid = when (cardInfoDbo.prepaid) {
-                    true -> Prepaid.Yes
-                    false -> Prepaid.No
-                    else -> Prepaid.Unknown
-                }
-            )
-        )
-        add(Item.Space)
-        add(
-            Item.Country(
-                emoji = cardInfoDbo.country?.emoji
-                    ?: resourcesProvider.getString(R.string.not_applicable),
-                name = cardInfoDbo.country?.name
-                    ?: resourcesProvider.getString(R.string.not_applicable),
-                latitude = (cardInfoDbo.country?.latitude
-                    ?: resourcesProvider.getString(R.string.not_applicable)).toString(),
-                longitude = (cardInfoDbo.country?.longitude
-                    ?: resourcesProvider.getString(R.string.not_applicable)).toString()
-            )
-        )
-        add(Item.Space)
-        add(
-            Item.Bank(
-                name = cardInfoDbo.bank?.name
-                    ?: resourcesProvider.getString(R.string.not_applicable),
-                city = cardInfoDbo.bank?.city
-                    ?: resourcesProvider.getString(R.string.not_applicable),
-                url = cardInfoDbo.bank?.url
-                    ?: resourcesProvider.getString(R.string.not_applicable),
-                phone = cardInfoDbo.bank?.phone
-                    ?: resourcesProvider.getString(R.string.not_applicable)
-            )
-        )
     }
 }
