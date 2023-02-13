@@ -18,6 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.cfttesttask.R
 import com.example.cfttesttask.ui.components.common.CardBin
+import com.example.cfttesttask.ui.components.common.CardDate
 import com.example.cfttesttask.ui.components.common.CardInfo
 
 @Composable
@@ -55,6 +56,7 @@ fun HistoryScreen(
         ) {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(allCardInfos) { cardInfoDbo ->
+                    CardDate(date = viewModel.createDateString(date = cardInfoDbo.date))
                     CardBin(bin = cardInfoDbo.bin)
                     CardInfo(
                         cardInfo = viewModel.createCardInfo(cardInfoDbo = cardInfoDbo),

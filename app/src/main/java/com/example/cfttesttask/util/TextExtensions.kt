@@ -3,8 +3,6 @@ package com.example.cfttesttask.util
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
-import com.example.cfttesttask.R
-import com.example.cfttesttask.data.local.dbo.CardInfoDbo
 
 fun AnnotatedString.cardFilter(): TransformedText {
     val trimmed = if (this.text.length >= 16) this.text.substring(0..15) else this.text

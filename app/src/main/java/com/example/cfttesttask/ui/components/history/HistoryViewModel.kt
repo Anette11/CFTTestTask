@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -52,7 +53,8 @@ class HistoryViewModel @Inject constructor(
                 is NetworkResource.Loading -> _isLoading.emit(true)
                 is NetworkResource.Success -> {
                     _isLoading.emit(false)
-                    val allCardInfos = resource.data
+                    val allCardInfos =
+                        resource.data?.sortedByDescending { cardInfoDbo -> cardInfoDbo.date }
                     _allCardInfos.emit(allCardInfos ?: emptyList())
                 }
                 is NetworkResource.Failure -> {
@@ -83,6 +85,13 @@ class HistoryViewModel @Inject constructor(
         repository.clearAllCardInfos()
         getAllCardInfos()
     }
+
+    fun createDateString(
+        date: Date?
+    ): String = createDateString(
+        date = date,
+        defaultDate = resourcesProvider.getString(R.string.not_applicable)
+    )
 
     init {
         getAllCardInfos()
