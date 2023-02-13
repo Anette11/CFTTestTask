@@ -1,5 +1,6 @@
 package com.example.cfttesttask.ui.components.common
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
@@ -20,7 +21,9 @@ import com.example.cfttesttask.util.Item
 
 @Composable
 fun CountryItem(
-    item: Item.Country
+    item: Item.Country,
+    onCoordinatesClick: (Double, Double) -> Unit,
+    areCoordinatesClickable: Boolean
 ) = Column(
     modifier = Modifier.fillMaxWidth(),
     horizontalAlignment = Alignment.CenterHorizontally
@@ -34,20 +37,45 @@ fun CountryItem(
         text = "${item.emoji} ${item.name}",
         style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
     )
-    Text(
-        buildAnnotatedString {
-            withStyle(style = SpanStyle(color = Color.LightGray)) {
-                append("(${stringResource(id = R.string.item_subtitle_country_latitude)}: ")
+    if (areCoordinatesClickable) {
+        Text(
+            buildAnnotatedString {
+                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                    append("(${stringResource(id = R.string.item_subtitle_country_latitude)}: ")
+                }
+                append(item.latitude)
+                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                    append(", ${stringResource(id = R.string.item_subtitle_country_longitude)}: ")
+                }
+                append(item.longitude)
+                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                    append(")")
+                }
+            },
+            style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp),
+            modifier = Modifier.clickable {
+                onCoordinatesClick(
+                    item.latitude.toDouble(),
+                    item.longitude.toDouble()
+                )
             }
-            append(item.latitude)
-            withStyle(style = SpanStyle(color = Color.LightGray)) {
-                append(", ${stringResource(id = R.string.item_subtitle_country_longitude)}: ")
-            }
-            append(item.longitude)
-            withStyle(style = SpanStyle(color = Color.LightGray)) {
-                append(")")
-            }
-        },
-        style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
-    )
+        )
+    } else {
+        Text(
+            buildAnnotatedString {
+                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                    append("(${stringResource(id = R.string.item_subtitle_country_latitude)}: ")
+                }
+                append(item.latitude)
+                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                    append(", ${stringResource(id = R.string.item_subtitle_country_longitude)}: ")
+                }
+                append(item.longitude)
+                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                    append(")")
+                }
+            },
+            style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
+        )
+    }
 }

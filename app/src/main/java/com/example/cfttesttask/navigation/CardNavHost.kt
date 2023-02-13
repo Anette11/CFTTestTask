@@ -10,7 +10,10 @@ import com.example.cfttesttask.ui.components.home.HomeScreen
 @Composable
 fun CardNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.Home.route
+    startDestination: String = Screen.Home.route,
+    onPhoneClick: (String) -> Unit,
+    onUrlClick: (String) -> Unit,
+    onCoordinatesClick: (Double, Double) -> Unit
 ) = NavHost(
     navController = navController,
     startDestination = startDestination
@@ -18,7 +21,13 @@ fun CardNavHost(
     composable(
         route = Screen.Home.route
     ) {
-        HomeScreen()
+        HomeScreen(
+            onPhoneClick = { phone: String -> onPhoneClick(phone) },
+            onUrlClick = { url: String -> onUrlClick(url) },
+            onCoordinatesClick = { latitude: Double, longitude: Double ->
+                onCoordinatesClick(latitude, longitude)
+            }
+        )
     }
     composable(
         route = Screen.History.route

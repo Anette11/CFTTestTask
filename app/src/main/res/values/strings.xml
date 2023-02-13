@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="app_name">CFTTestTask</string>
+    <string name="activity_not_found_exception_message">No activity is found to handle intent</string>
     <string name="generic_error">Something went wrong</string>
     <string name="home_app_bar_title">Home screen</string>
     <string name="item_subtitle_card_number_length">LENGTH</string>

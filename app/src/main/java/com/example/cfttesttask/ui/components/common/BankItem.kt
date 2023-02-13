@@ -1,5 +1,6 @@
 package com.example.cfttesttask.ui.components.common
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
@@ -17,7 +18,11 @@ import com.example.cfttesttask.util.Item
 
 @Composable
 fun BankItem(
-    item: Item.Bank
+    item: Item.Bank,
+    onPhoneClick: (String) -> Unit,
+    onUrlClick: (String) -> Unit,
+    isOnPhoneClickEnable: Boolean,
+    isUrlClickable: Boolean
 ) = Column(
     modifier = Modifier.fillMaxWidth(),
     horizontalAlignment = Alignment.CenterHorizontally
@@ -31,13 +36,30 @@ fun BankItem(
         text = "${item.name}, ${item.city}",
         style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
     )
-    Text(
-        text = item.url,
-        color = Color.Blue,
-        style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
-    )
-    Text(
-        text = item.phone,
-        style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
-    )
+    if (isUrlClickable) {
+        Text(
+            text = item.url,
+            color = Color.Blue,
+            style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp),
+            modifier = Modifier.clickable { onUrlClick(item.url) }
+        )
+    } else {
+        Text(
+            text = item.url,
+            color = Color.Blue,
+            style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
+        )
+    }
+    if (isOnPhoneClickEnable) {
+        Text(
+            text = item.phone,
+            style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp),
+            modifier = Modifier.clickable { onPhoneClick(item.phone) }
+        )
+    } else {
+        Text(
+            text = item.phone,
+            style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
+        )
+    }
 }

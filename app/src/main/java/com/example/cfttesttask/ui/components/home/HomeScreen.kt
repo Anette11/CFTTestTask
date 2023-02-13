@@ -19,7 +19,10 @@ import com.example.cfttesttask.ui.components.common.SearchTextField
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    onPhoneClick: (String) -> Unit,
+    onUrlClick: (String) -> Unit,
+    onCoordinatesClick: (Double, Double) -> Unit
 ) {
     val isLoading by viewModel.isLoading.collectAsState()
     val cardInfo by viewModel.cardInfo.collectAsState()
@@ -54,7 +57,14 @@ fun HomeScreen(
                     isClearEnable = viewModel.isEnable(),
                     isSearchEnable = viewModel.isEnable()
                 )
-                if (cardInfo.isNotEmpty()) CardInfo(cardInfo = cardInfo)
+                if (cardInfo.isNotEmpty()) CardInfo(
+                    cardInfo = cardInfo,
+                    onPhoneClick = { phone: String -> onPhoneClick(phone) },
+                    onUrlClick = { url: String -> onUrlClick(url) },
+                    onCoordinatesClick = { latitude: Double, longitude: Double ->
+                        onCoordinatesClick(latitude, longitude)
+                    }
+                )
             }
             if (isLoading) CircularProgressIndicator(color = colorResource(id = R.color.green))
         }

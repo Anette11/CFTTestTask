@@ -10,12 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import com.example.cfttesttask.R
 import com.example.cfttesttask.util.Item
 
 @Composable
 fun CardInfo(
-    cardInfo: List<Item>
+    cardInfo: List<Item>,
+    onPhoneClick: (String) -> Unit,
+    onUrlClick: (String) -> Unit,
+    onCoordinatesClick: (Double, Double) -> Unit
 ) = Card(
     modifier = Modifier
         .padding(dimensionResource(id = R.dimen._8dp))
@@ -34,8 +38,21 @@ fun CardInfo(
                 is Item.CardNumber -> CardNumberItem(item = item)
                 is Item.Type -> TypeItem(item = item)
                 is Item.Prepaid -> PrepaidItem(item = item)
-                is Item.Country -> CountryItem(item = item)
-                is Item.Bank -> BankItem(item = item)
+                is Item.Country -> CountryItem(
+                    item = item,
+                    onCoordinatesClick = { latitude: Double, longitude: Double ->
+                        onCoordinatesClick(latitude, longitude)
+                    },
+                    areCoordinatesClickable = item.latitude != stringResource(id = R.string.not_applicable)
+                            && item.longitude != stringResource(id = R.string.not_applicable)
+                )
+                is Item.Bank -> BankItem(
+                    item = item,
+                    onPhoneClick = { phone: String -> onPhoneClick(phone) },
+                    onUrlClick = { url: String -> onUrlClick(url) },
+                    isOnPhoneClickEnable = item.phone.all { char -> !char.isLetter() },
+                    isUrlClickable = item.url != stringResource(id = R.string.not_applicable)
+                )
                 Item.Space -> SpaceItem()
             }
         }
