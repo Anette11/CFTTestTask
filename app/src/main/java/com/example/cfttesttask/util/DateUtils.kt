@@ -10,7 +10,7 @@ fun createDateString(
 ): String {
     if (date == null) return defaultDate
     return try {
-        val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault())
+        val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy, HH:mm:ss", Locale.getDefault())
         simpleDateFormat.format(date)
     } catch (e: ParseException) {
         defaultDate
