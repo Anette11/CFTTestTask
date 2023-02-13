@@ -7,6 +7,7 @@ import com.example.cfttesttask.data.local.dbo.CardInfoDbo
 import com.example.cfttesttask.repository.CardRepository
 import com.example.cfttesttask.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: CardRepository,
-    private val resourcesProvider: ResourcesProvider
+    private val resourcesProvider: ResourcesProvider,
+    private val coroutineDispatchersProvider: CoroutineDispatchersProvider
 ) : ViewModel() {
 
     private val _cardInfo: MutableStateFlow<List<Item>> = MutableStateFlow(emptyList())
@@ -43,7 +45,14 @@ class HomeViewModel @Inject constructor(
     private val _error: MutableSharedFlow<String> = MutableSharedFlow()
     val error: SharedFlow<String> = _error
 
-    fun getCardInfo() = viewModelScope.launch {
+    fun getCardInfo() = viewModelScope.launch(
+        CoroutineExceptionHandler { _, _ ->
+            viewModelScope.launch(coroutineDispatchersProvider.io) {
+                _isLoading.emit(false)
+                _error.emit(resourcesProvider.getString(R.string.generic_error))
+            }
+        }
+    ) {
         repository.getCardInfo(bin = value.value)
             .collect { resource: NetworkResource<CardInfoDbo> ->
                 when (resource) {
