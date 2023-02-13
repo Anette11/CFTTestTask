@@ -27,7 +27,7 @@ fun CardNumberItem(
 ) {
     Text(
         text = stringResource(id = R.string.item_title_card_number),
-        color = colorResource(id = R.color.medium_green),
+        color = colorResource(id = R.color.green),
         style = TextStyle(fontSize = dimensionResource(id = R.dimen._20sp).value.sp)
     )
     Row(
@@ -39,7 +39,7 @@ fun CardNumberItem(
         ) {
             Text(
                 text = stringResource(id = R.string.item_subtitle_card_number_length),
-                color = Color.LightGray,
+                color = Color.Gray,
                 style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
             )
             Text(
@@ -53,7 +53,7 @@ fun CardNumberItem(
         ) {
             Text(
                 text = stringResource(id = R.string.item_subtitle_card_number_luhn),
-                color = Color.LightGray,
+                color = Color.Gray,
                 style = TextStyle(fontSize = dimensionResource(id = R.dimen._18sp).value.sp)
             )
             when (item.luhn) {

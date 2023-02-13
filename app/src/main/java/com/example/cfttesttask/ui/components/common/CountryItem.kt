@@ -30,7 +30,7 @@ fun CountryItem(
 ) {
     Text(
         text = stringResource(id = R.string.item_title_country),
-        color = colorResource(id = R.color.medium_green),
+        color = colorResource(id = R.color.green),
         style = TextStyle(fontSize = dimensionResource(id = R.dimen._20sp).value.sp)
     )
     Text(
@@ -40,15 +40,15 @@ fun CountryItem(
     if (areCoordinatesClickable) {
         Text(
             buildAnnotatedString {
-                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                withStyle(style = SpanStyle(color = Color.Gray)) {
                     append("(${stringResource(id = R.string.item_subtitle_country_latitude)}: ")
                 }
                 append(item.latitude)
-                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                withStyle(style = SpanStyle(color = Color.Gray)) {
                     append(", ${stringResource(id = R.string.item_subtitle_country_longitude)}: ")
                 }
                 append(item.longitude)
-                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                withStyle(style = SpanStyle(color = Color.Gray)) {
                     append(")")
                 }
             },
@@ -63,15 +63,15 @@ fun CountryItem(
     } else {
         Text(
             buildAnnotatedString {
-                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                withStyle(style = SpanStyle(color = Color.Gray)) {
                     append("(${stringResource(id = R.string.item_subtitle_country_latitude)}: ")
                 }
                 append(item.latitude)
-                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                withStyle(style = SpanStyle(color = Color.Gray)) {
                     append(", ${stringResource(id = R.string.item_subtitle_country_longitude)}: ")
                 }
                 append(item.longitude)
-                withStyle(style = SpanStyle(color = Color.LightGray)) {
+                withStyle(style = SpanStyle(color = Color.Gray)) {
                     append(")")
                 }
             },

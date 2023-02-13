@@ -29,7 +29,7 @@ fun BankItem(
 ) {
     Text(
         text = stringResource(id = R.string.item_title_bank),
-        color = colorResource(id = R.color.medium_green),
+        color = colorResource(id = R.color.green),
         style = TextStyle(fontSize = dimensionResource(id = R.dimen._20sp).value.sp)
     )
     Text(
