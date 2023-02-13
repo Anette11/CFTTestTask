@@ -50,7 +50,12 @@ fun SearchTextField(
                 modifier = Modifier.weight(1f),
                 singleLine = true,
                 label = { Text(text = stringResource(id = R.string.search_text_field_label)) },
-                placeholder = { Text(text = stringResource(id = R.string.search_text_field_placeholder)) },
+                placeholder = {
+                    Text(
+                        text = stringResource(id = R.string.search_text_field_placeholder),
+                        color = Color.LightGray
+                    )
+                },
                 trailingIcon = {
                     IconButton(
                         enabled = isClearEnable,
