@@ -93,6 +93,11 @@ class HistoryViewModel @Inject constructor(
         defaultDate = resourcesProvider.getString(R.string.not_applicable)
     )
 
+    fun createFormattedBin(
+        bin: String
+    ): String = bin.chunked(4)
+        .joinToString(resourcesProvider.getString(R.string.space))
+
     init {
         getAllCardInfos()
     }

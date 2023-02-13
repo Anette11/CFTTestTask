@@ -57,7 +57,7 @@ fun HistoryScreen(
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(allCardInfos) { cardInfoDbo ->
                     CardDate(date = viewModel.createDateString(date = cardInfoDbo.date))
-                    CardBin(bin = cardInfoDbo.bin)
+                    CardBin(bin = viewModel.createFormattedBin(bin = cardInfoDbo.bin))
                     CardInfo(
                         cardInfo = viewModel.createCardInfo(cardInfoDbo = cardInfoDbo),
                         onPhoneClick = { phone: String -> onPhoneClick(phone) },
