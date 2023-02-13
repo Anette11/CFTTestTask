@@ -14,7 +14,8 @@ fun CardNavHost(
     startDestination: String = Screen.Home.route,
     onPhoneClick: (String) -> Unit,
     onUrlClick: (String) -> Unit,
-    onCoordinatesClick: (Double, Double) -> Unit
+    onCoordinatesClick: (Double, Double) -> Unit,
+    onError: (String) -> Unit
 ) = NavHost(
     navController = navController,
     startDestination = startDestination
@@ -28,7 +29,8 @@ fun CardNavHost(
             onCoordinatesClick = { latitude: Double, longitude: Double ->
                 onCoordinatesClick(latitude, longitude)
             },
-            onHistoryClick = { navController.navigate(route = Screen.History.route) }
+            onHistoryClick = { navController.navigate(route = Screen.History.route) },
+            onError = { message: String -> onError(message) }
         )
     }
     composable(
@@ -40,7 +42,8 @@ fun CardNavHost(
             onUrlClick = { url: String -> onUrlClick(url) },
             onCoordinatesClick = { latitude: Double, longitude: Double ->
                 onCoordinatesClick(latitude, longitude)
-            }
+            },
+            onError = { message: String -> onError(message) }
         )
     }
 }

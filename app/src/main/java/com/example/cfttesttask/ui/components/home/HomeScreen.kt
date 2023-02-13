@@ -1,6 +1,5 @@
 package com.example.cfttesttask.ui.components.home
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -12,7 +11,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.cfttesttask.R
@@ -25,17 +23,15 @@ fun HomeScreen(
     onPhoneClick: (String) -> Unit,
     onUrlClick: (String) -> Unit,
     onCoordinatesClick: (Double, Double) -> Unit,
-    onHistoryClick: () -> Unit
+    onHistoryClick: () -> Unit,
+    onError: (String) -> Unit
 ) {
     val isLoading by viewModel.isLoading.collectAsState()
     val cardInfo by viewModel.cardInfo.collectAsState()
     val value by viewModel.value.collectAsState()
-    val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
-        viewModel.error.collect { error: String ->
-            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-        }
+        viewModel.error.collect { message: String -> onError(message) }
     }
 
     Scaffold(

@@ -25,7 +25,8 @@ class MainActivity : ComponentActivity() {
                 onUrlClick = { url: String -> onUrlClick(url = url) },
                 onCoordinatesClick = { latitude: Double, longitude: Double ->
                     onCoordinatesClick(latitude, longitude)
-                }
+                },
+                onError = { message: String -> showToast(message = message) }
             )
         }
     }
