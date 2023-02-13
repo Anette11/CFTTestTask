@@ -5,9 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cfttesttask.R
 import com.example.cfttesttask.data.local.dbo.CardInfoDbo
 import com.example.cfttesttask.repository.CardRepository
-import com.example.cfttesttask.util.Item
-import com.example.cfttesttask.util.NetworkResource
-import com.example.cfttesttask.util.ResourcesProvider
+import com.example.cfttesttask.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
     private val repository: CardRepository,
-    private val resourcesProvider: ResourcesProvider
+    private val resourcesProvider: ResourcesProvider,
+    private val coroutineDispatchersProvider: CoroutineDispatchersProvider
 ) : ViewModel() {
 
     private val _showDialogClearHistory: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -38,7 +37,16 @@ class HistoryViewModel @Inject constructor(
     private val _error: MutableSharedFlow<String> = MutableSharedFlow()
     val error: SharedFlow<String> = _error
 
-    private fun getAllCardInfos() = viewModelScope.launch {
+    private fun getAllCardInfos() = viewModelScope.launch(
+        createCoroutineExceptionHandler(
+            onError = {
+                viewModelScope.launch(coroutineDispatchersProvider.io) {
+                    _isLoading.emit(false)
+                    _error.emit(resourcesProvider.getString(R.string.generic_error))
+                }
+            }
+        )
+    ) {
         repository.getAllCardInfos().collect { resource: NetworkResource<List<CardInfoDbo>> ->
             when (resource) {
                 is NetworkResource.Loading -> _isLoading.emit(true)
@@ -61,7 +69,16 @@ class HistoryViewModel @Inject constructor(
         cardInfoDbo: CardInfoDbo
     ): List<Item> = repository.createCardInfo(cardInfoDbo = cardInfoDbo)
 
-    fun clearAllCardInfos() = viewModelScope.launch {
+    fun clearAllCardInfos() = viewModelScope.launch(
+        createCoroutineExceptionHandler(
+            onError = {
+                viewModelScope.launch(coroutineDispatchersProvider.io) {
+                    _isLoading.emit(false)
+                    _error.emit(resourcesProvider.getString(R.string.generic_error))
+                }
+            }
+        )
+    ) {
         onShowDialogClearHistory()
         repository.clearAllCardInfos()
         getAllCardInfos()
