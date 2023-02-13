@@ -56,7 +56,10 @@ class HomeViewModel @Inject constructor(
         repository.getCardInfo(bin = value.value)
             .collect { resource: NetworkResource<CardInfoDbo> ->
                 when (resource) {
-                    is NetworkResource.Loading -> _isLoading.emit(true)
+                    is NetworkResource.Loading -> {
+                        _isLoading.emit(true)
+                        _cardInfo.emit(emptyList())
+                    }
                     is NetworkResource.Success -> {
                         _isLoading.emit(false)
                         val list = createCardInfo(cardInfoDbo = resource.data!!)
