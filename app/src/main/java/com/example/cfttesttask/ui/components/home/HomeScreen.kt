@@ -22,7 +22,8 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onPhoneClick: (String) -> Unit,
     onUrlClick: (String) -> Unit,
-    onCoordinatesClick: (Double, Double) -> Unit
+    onCoordinatesClick: (Double, Double) -> Unit,
+    onHistoryClick: () -> Unit
 ) {
     val isLoading by viewModel.isLoading.collectAsState()
     val cardInfo by viewModel.cardInfo.collectAsState()
@@ -37,9 +38,7 @@ fun HomeScreen(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = {
-            HomeAppBar()
-        },
+        topBar = { HomeAppBar(onHistoryClick = onHistoryClick) },
         backgroundColor = colorResource(id = R.color.gray)
     ) { paddingValues: PaddingValues ->
         Box(

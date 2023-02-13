@@ -1,4 +1,4 @@
-package com.example.cfttesttask.ui.components.home
+package com.example.cfttesttask.ui.components.history
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
@@ -14,18 +14,27 @@ import androidx.compose.ui.res.stringResource
 import com.example.cfttesttask.R
 
 @Composable
-fun HomeAppBar(
-    onHistoryClick: () -> Unit
+fun HistoryAppBar(
+    onBackClick: () -> Unit,
+    onClearClick: () -> Unit
 ) = TopAppBar(
     modifier = Modifier.fillMaxWidth(),
-    title = { Text(text = stringResource(id = R.string.home_app_bar_title)) },
+    title = { Text(text = stringResource(id = R.string.history_app_bar_title)) },
     backgroundColor = colorResource(id = R.color.light_green),
     contentColor = colorResource(id = R.color.white),
-    actions = {
-        IconButton(onClick = onHistoryClick) {
+    navigationIcon = {
+        IconButton(onClick = onBackClick) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_history),
-                contentDescription = stringResource(id = R.string.icon_history_content_description),
+                painter = painterResource(R.drawable.ic_back),
+                contentDescription = stringResource(id = R.string.icon_back_content_description)
+            )
+        }
+    },
+    actions = {
+        IconButton(onClick = onClearClick) {
+            Icon(
+                painter = painterResource(R.drawable.ic_clear),
+                contentDescription = stringResource(id = R.string.icon_clear_content_description),
                 tint = Color.White
             )
         }
